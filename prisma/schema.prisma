@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Mineral {
+  id             String   @id @default(cuid())
+  name           String   @unique
+  colors         String[]
+  benefits       String[]
+  canBePrimary   Boolean  @default(true)
+  canBeSecondary Boolean  @default(true)
+  stock          Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model CordColor {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  style     String   @default("unisex")
+  stock     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BraceletDesign {
+  id         String   @id @default(cuid())
+  objective  String
+  gender     String
+  notes      String?
+  resultJson Json
+  imageUrl   String?
+  createdAt  DateTime @default(now())
+}
